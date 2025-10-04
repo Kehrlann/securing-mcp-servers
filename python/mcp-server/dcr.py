@@ -26,15 +26,19 @@ auth = RemoteAuthProvider(
 custom_middleware = [
     Middleware(CORSMiddleware, allow_origins=["*"],
                allow_methods=["*"],
-               allow_headers=["*"],),
+               allow_headers=["*"], ),
 ]
 
 mcp = FastMCP("My MCP Server", auth=auth)
 
+
 @mcp.tool
 def greet(language: str) -> str:
     access_token = get_access_token()
-    return f"Hello, {access_token.claims["name"]}!"
+    return f"Hello, {access_token.claims["sub"]}?"
+
+
+app = mcp.http_app(transport="http", path="/mcp", middleware=custom_middleware)
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http",path="/mcp")
+    uvicorn.run("dcr:app", port=8000, reload=True)
