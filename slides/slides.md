@@ -226,7 +226,7 @@ authorizes
 
 🖥️ [**Claude Desktop** | ChatGPT | Cursor]
 
-to [access resources | call tools | ...]
+to [access resources | call tools | ...] on
 
 📸 **Awesome Company MCP Server**
 
@@ -261,6 +261,35 @@ layout: image
 image: /sso-5-more-details-oauth.png
 class: background-contain
 ---
+
+---
+layout: image
+image: /sso-for-mcp.png
+class: background-contain
+---
+
+---
+
+# It's all about trust
+
+&nbsp;
+
+There's a lot of relationships between actors.
+
+The client <> server relation MUST be trusted.
+
+---
+layout: image
+image: /sso-trust-relationship.png
+class: background-contain
+---
+
+---
+layout: image
+image: /sso-mcp-no-trust.png
+class: background-contain
+---
+
 
 
 ---
