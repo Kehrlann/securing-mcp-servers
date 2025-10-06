@@ -8,7 +8,6 @@ transition: none
 css: unocss
 aspectRatio: "16/9"
 colorSchema: "light"
-canvasWidth: 1024
 layout: cover
 ---
 
@@ -165,6 +164,104 @@ image: rfc-pop-quizz-1.png
 layout: image
 image: rfc-pop-quizz-2.png
 ---
+
+---
+
+# It's Complicated™
+
+&nbsp;
+
+Noone truly implements the full stack.
+
+It's early! It _will_ change.
+
+---
+
+# Securing MCP Servers
+
+1. A brief history
+1. **All about OAuth2**
+1. In practice: Spring AI integration
+1. Notable alternative: API keys
+
+---
+
+# OAuth 2 & 2.1
+
+<br>
+
+- An *Authorization* framework
+  - Goal: Grant **applications** the **permission** to access **ressources** through **HTTP**.
+- Using *tokens*, in this case `access_token`
+- A long list of specs
+  - **https://oauth.net/specs/** (sometimes a bit ... dry ...)
+
+---
+
+# OAuth 2 & 2.1
+
+For example:
+
+🧑🏻 **Daniel**
+
+authorizes
+
+🖥️ **my-photo-book.example.com**
+
+to access his pictures hosted on
+
+📸 **Google Photos**
+
+(without sharing his 🔐 Google password)
+
+---
+
+# OAuth 2 & 2.1: for MCP clients
+
+For example:
+
+🧑🏻 **Daniel**
+
+authorizes
+
+🖥️ [**Claude Desktop** | ChatGPT | Cursor]
+
+to [access resources | call tools | ...]
+
+📸 **Awesome Company MCP Server**
+
+(without sharing his 🔐 Company password)
+
+---
+layout: fact
+---
+
+# How and why?
+
+---
+layout: image
+image: /sso-1-give-password.png
+class: background-contain
+---
+
+---
+layout: image
+image: /sso-2-give-password-bad-idea.png
+class: background-contain
+---
+
+---
+layout: image
+image: /sso-3-high-level-authorization-code.png
+class: background-contain
+---
+
+---
+layout: image
+image: /sso-5-more-details-oauth.png
+class: background-contain
+---
+
 
 ---
 

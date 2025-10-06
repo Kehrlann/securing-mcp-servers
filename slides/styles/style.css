@@ -28,7 +28,7 @@ html {
     }  
   }
 
-  &[layout="image"] {
+  &[layout="image"], &.background-contain {
     background-size: contain !important;
   }
 
