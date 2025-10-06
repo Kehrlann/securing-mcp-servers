@@ -45,6 +45,129 @@ Software Engineer @ Broadcom
 
 ---
 
+# Securing MCP Servers
+
+1. A brief history
+    1. A timeline
+    1. The decision: oauth2
+    1. New stuff lol
+1. All about OAuth2
+    1. How oauth2 works
+    1. In MCP land
+    1. Spring AI integration
+    1. No token passthrough 😱
+1. Notable alternative: API keys
+    1. Demo
+    1. Drawbacks
+
+---
+
+# Securing MCP Servers
+
+1. A brief history
+1. All about OAuth2
+1. In practice: Spring AI integration
+1. Notable alternative: API keys
+
+---
+
+# Securing MCP Servers
+
+1. **A brief history**
+1. All about OAuth2
+1. In practice: Spring AI integration
+1. Notable alternative: API keys
+
+---
+layout: image
+image: mcp-history-1.png
+---
+
+---
+layout: image
+image: mcp-history-2.png
+---
+
+---
+layout: image
+image: mcp-history-3.png
+---
+
+---
+layout: image
+image: mcp-history-4.png
+---
+
+---
+layout: image
+image: mcp-history-5.png
+---
+
+---
+layout: image
+image: mcp-history-6.png
+---
+
+---
+layout: image
+image: mcp-history-7.png
+---
+
+---
+layout: image
+image: mcp-history-8.png
+---
+
+---
+layout: image
+image: mcp-history-9.png
+---
+
+---
+layout: image
+image: mcp-history-10.png
+---
+
+---
+layout: image
+image: mcp-history-11.png
+---
+
+---
+layout: image
+image: mcp-history-12.png
+---
+
+---
+layout: image
+image: mcp-history-13.png
+---
+
+---
+
+# The spec: use OAuth2
+
+- **MCP Server** == OAuth2 Resource Server
+    - => Authorizes with valid JWT tokens
+
+- **MCP Client** == OAuth2 Client
+    - => Requests tokens on behalf of user
+
+- An **OAuth2 Authorization Server**
+    - Validates user identity, issues tokens
+
+---
+layout: image
+image: rfc-pop-quizz-1.png
+---
+
+---
+layout: image
+image: rfc-pop-quizz-2.png
+---
+
+---
+
 ## References
 
 &nbsp;
