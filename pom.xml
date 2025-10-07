@@ -11,6 +11,7 @@
 
     <modules>
         <module>mcp-server-appointment</module>
+        <module>mcp-server-weather</module>
         <module>authorization-server</module>
     </modules>
 
@@ -52,5 +53,19 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

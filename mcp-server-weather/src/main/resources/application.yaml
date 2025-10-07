@@ -1,0 +1,12 @@
+spring:
+  ai:
+    mcp:
+      server:
+        stdio: true
+  main:
+    banner-mode: off
+    web-application-type: none
+
+logging:
+  level:
+    root: off
