@@ -21,11 +21,17 @@ spring:
               redirect-uris:
                 - "http://127.0.0.1:8080/authorize/oauth2/code/authserver"
                 - "http://localhost:8080/authorize/oauth2/code/authserver"
+                - "http://127.0.0.1:8080/login/oauth2/code/authserver"
+                - "http://localhost:8080/login/oauth2/code/authserver"
                 - "http://127.0.0.1:8081/authorize/oauth2/code/authserver"
                 - "http://localhost:8081/authorize/oauth2/code/authserver"
                 - "http://localhost:6274/oauth/callback" # mcp-inspector
                 - "http://localhost:6274/oauth/callback/debug" # mcp-inspector
                 - "https://claude.ai/api/mcp/auth_callback"
+              scopes:
+                - openid
+                - email
+                - profile
     user:
       name: user
       password: password

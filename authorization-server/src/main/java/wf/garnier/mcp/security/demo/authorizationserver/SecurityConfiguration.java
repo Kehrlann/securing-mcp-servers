@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import static org.springaicommunity.mcp.security.authorizationserver.config.McpAuthorizationServerConfigurer.mcpAuthorizationServer;
 import static org.springframework.security.config.Customizer.withDefaults;
+import static org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer.authorizationServer;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +27,7 @@ class SecurityConfiguration {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
+			.with(authorizationServer(), authServer -> authServer.oidc(withDefaults()))
 			.with(mcpAuthorizationServer(), withDefaults())
 			.formLogin(withDefaults())
 			.cors(cors -> cors.configurationSource(_ -> configurationSource()))
@@ -41,12 +43,12 @@ class SecurityConfiguration {
 	@Bean
 	OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
 		return ctx -> {
-			DemoUser user = ctx.getPrincipal();
+			DemoUser user = (DemoUser) ctx.getPrincipal().getPrincipal();
 			ctx.getClaims().subject(user.getUserEmail());
 			if (ctx.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
 				ctx.getClaims().claim(StandardClaimNames.EMAIL, user.getUserEmail());
 				ctx.getClaims().claim(StandardClaimNames.EMAIL_VERIFIED, true);
-                ctx.getClaims().claim(StandardClaimNames.NAME, user.getUsername());
+				ctx.getClaims().claim(StandardClaimNames.NAME, user.getUsername());
 			}
 		};
 	}
