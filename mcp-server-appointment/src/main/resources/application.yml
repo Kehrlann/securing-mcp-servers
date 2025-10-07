@@ -1,6 +1,12 @@
+server:
+  port: ${PORT:8080}
+
 spring:
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI:http://localhost:9000}
       client:
         registration:
           authserver:
@@ -12,4 +18,9 @@ spring:
               - email
         provider:
           authserver:
-            issuer-uri: http://localhost:9000
+            issuer-uri: ${ISSUER_URI:http://localhost:9000}
+  ai:
+    mcp:
+      server:
+        protocol: stateless
+        name: appointment-server
