@@ -16,6 +16,7 @@ class SecurityConfiguration {
         return http
                 .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
                 .oauth2Login(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(new AllowAllCorsConfigurationSource()))
                 .build();
     }
 }

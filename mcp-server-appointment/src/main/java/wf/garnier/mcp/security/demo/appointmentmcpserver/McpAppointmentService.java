@@ -1,11 +1,14 @@
 package wf.garnier.mcp.security.demo.appointmentmcpserver;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import io.modelcontextprotocol.spec.McpSchema;
 import org.springaicommunity.mcp.annotation.McpTool;
 import org.springaicommunity.mcp.annotation.McpToolParam;
 
+import org.springframework.ai.chat.messages.ToolResponseMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -19,13 +22,57 @@ class McpAppointmentService {
 		this.appointmentService = appointmentService;
 	}
 
-	@McpTool(name = "my-appointments", description = "List my appointments between two dates")
+	@McpTool(name = "my-appointments", description = "List my appointments between to datetimes")
 	public List<AppointmentSlot> myAppointments(
-			@McpToolParam(description = "the start date, inclusive", required = false) LocalDate startDate,
-			@McpToolParam(description = "the end date, inclusive", required = false) LocalDate endDate) {
+			@McpToolParam(description = "the start date and time, inclusive", required = false) LocalDate startDate,
+			@McpToolParam(description = "the end date and time, inclusive", required = false) LocalDate endDate) {
 		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		return appointmentService.findSlotsByUserEmailAndDateRange(jwt.getSubject(), startDate, endDate);
+	}
+
+	@McpTool(name = "all-appointment-slots",
+			description = "List all available appointment slots between to datetimes, with a status indicating whether it's booked")
+	public List<AppointmentWithBooking> allAppointmentSlots(
+			@McpToolParam(description = "the start date and time, inclusive", required = false) LocalDate startDate,
+			@McpToolParam(description = "the end date and time, inclusive", required = false) LocalDate endDate) {
+		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		var email = jwt.getSubject();
+
+		return appointmentService.findSlotsByDateRange(startDate, endDate)
+			.stream()
+			.map(slot -> new AppointmentWithBooking(slot.id(), slot.name(), slot.dateTime(),
+					appointmentService.isBooked(slot.id(), email)))
+			.toList();
+	}
+
+	record AppointmentWithBooking(Integer id, String name, LocalDateTime localDateTime, boolean booked) {
+	}
+
+	@McpTool(name = "book-appointment", description = "Book an appointment by name and datetime")
+	public McpSchema.CallToolResult bookAppointment(@McpToolParam(description = "the name of the slot") String name,
+			@McpToolParam(description = "the datetime of the appointment slot") LocalDateTime date) {
+		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		var email = jwt.getSubject();
+
+		var slotOpt = appointmentService.findSlotByNameAndDateTime(name, date);
+
+		if (slotOpt.isEmpty()) {
+			return McpSchema.CallToolResult.builder().isError(true).addTextContent("slot does not exist").build();
+		}
+
+		var slot = slotOpt.get();
+
+		if (appointmentService.isBooked(slot.id(), email)) {
+            return McpSchema.CallToolResult.builder().isError(true).addTextContent("appointment is already booked").build();
+		}
+
+		appointmentService.bookAppointment(slot.id(), email);
+
+		var booking = new AppointmentWithBooking(slot.id(), slot.name(), slot.dateTime(), true);
+		return McpSchema.CallToolResult.builder()
+                .structuredContent(booking)
+                .build();
 	}
 
 }

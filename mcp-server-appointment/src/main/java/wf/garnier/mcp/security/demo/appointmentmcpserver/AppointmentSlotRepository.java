@@ -14,7 +14,7 @@ public class AppointmentSlotRepository {
 
 	public void save(AppointmentSlot slot) {
 		if (slot.id() == null) {
-			slots.add(new AppointmentSlot(nextId++, slot.name(), slot.localDateTime()));
+			slots.add(new AppointmentSlot(nextId++, slot.name(), slot.dateTime()));
 		}
 		else {
 			slots.add(slot);

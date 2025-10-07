@@ -29,4 +29,5 @@ public class AppointmentRepository {
 		return appointments.stream().filter(a -> a.userEmail().equals(userEmail)).toList();
 	}
 
+
 }

@@ -1,7 +1,10 @@
 package wf.garnier.mcp.security.demo.appointmentmcpserver;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,41 +34,6 @@ public class AppointmentService {
 		return appointmentRepository.findByAppointmentIdAndUserEmail(appointmentId, userEmail).isPresent();
 	}
 
-	public List<Appointment> findByUserEmail(String userEmail) {
-		return appointmentRepository.findByUserEmail(userEmail);
-	}
-
-	public List<Appointment> findByUserEmailAndDateRange(String userEmail, LocalDate startDate, LocalDate endDate) {
-		List<Appointment> appointments = appointmentRepository.findByUserEmail(userEmail);
-
-		if (startDate == null && endDate == null) {
-			return appointments;
-		}
-
-		return appointments.stream().filter(appointment -> {
-			var slot = slotRepository.findAll()
-				.stream()
-				.filter(s -> s.id().equals(appointment.appointmentId()))
-				.findFirst();
-
-			if (slot.isEmpty()) {
-				return false;
-			}
-
-			LocalDate appointmentDate = slot.get().localDateTime().toLocalDate();
-
-			if (startDate != null && appointmentDate.isBefore(startDate)) {
-				return false;
-			}
-
-			if (endDate != null && appointmentDate.isAfter(endDate)) {
-				return false;
-			}
-
-			return true;
-		}).toList();
-	}
-
 	public List<AppointmentSlot> findSlotsByUserEmailAndDateRange(String userEmail, LocalDate startDate,
 			LocalDate endDate) {
 		List<Appointment> appointments = appointmentRepository.findByUserEmail(userEmail);
@@ -76,21 +44,33 @@ public class AppointmentService {
 				.filter(s -> s.id().equals(appointment.appointmentId()))
 				.findFirst()
 				.orElse(null))
-			.filter(slot -> slot != null)
-			.filter(slot -> {
-				LocalDate appointmentDate = slot.localDateTime().toLocalDate();
-
-				if (startDate != null && appointmentDate.isBefore(startDate)) {
-					return false;
-				}
-
-				if (endDate != null && appointmentDate.isAfter(endDate)) {
-					return false;
-				}
-
-				return true;
-			})
+			.filter(Objects::nonNull)
+			.filter(slot -> slotIsWithinDateRange(startDate, endDate, slot))
 			.toList();
+	}
+
+	public List<AppointmentSlot> findSlotsByDateRange(LocalDate startDate, LocalDate endDate) {
+		List<AppointmentSlot> allSlots = slotRepository.findAll();
+
+		if (startDate == null && endDate == null) {
+			return allSlots;
+		}
+
+		return allSlots.stream().filter(slot -> slotIsWithinDateRange(startDate, endDate, slot)).toList();
+	}
+
+	public Optional<AppointmentSlot> findSlotByNameAndDateTime(String name, LocalDateTime dateTime) {
+		return slotRepository.findAll().stream()
+			.filter(slot -> slot.name().equalsIgnoreCase(name) && slot.dateTime().equals(dateTime))
+			.findFirst();
+	}
+
+	private static boolean slotIsWithinDateRange(LocalDate startDate, LocalDate endDate, AppointmentSlot slot) {
+		LocalDate appointmentDate = slot.dateTime().toLocalDate();
+		var isBeforeStartDate = startDate != null && appointmentDate.isBefore(startDate);
+		var isAfterEndDate = endDate != null && appointmentDate.isAfter(endDate);
+
+		return !(isBeforeStartDate || isAfterEndDate);
 	}
 
 }

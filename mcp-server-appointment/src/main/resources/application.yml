@@ -24,3 +24,7 @@ spring:
       server:
         protocol: stateless
         name: appointment-server
+
+#logging:
+#  level:
+#    org.springframework.security: TRACE
