@@ -1,0 +1,15 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          authserver:
+            client-name: Spring Auth Server
+            client-id: "default-client"
+            client-secret: "default-secret"
+            scope:
+              - openid
+              - email
+        provider:
+          authserver:
+            issuer-uri: http://localhost:9000
