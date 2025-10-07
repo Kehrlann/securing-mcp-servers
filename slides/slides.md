@@ -66,7 +66,9 @@ Software Engineer @ Broadcom
 1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
+1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
+1. Clients and Authorization Servers
 
 ---
 
@@ -75,7 +77,9 @@ Software Engineer @ Broadcom
 1. **A brief history**
 1. All about OAuth2
 1. In practice: Spring AI integration
+1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
+1. Clients and Authorization Servers
 
 ---
 layout: image
@@ -171,7 +175,9 @@ image: rfc-pop-quizz-2.png
 
 &nbsp;
 
-Noone truly implements the full stack.
+Noone fully implements the whole stack. The complexity is still very high.
+
+<br>
 
 It's early! It _will_ change.
 
@@ -182,7 +188,9 @@ It's early! It _will_ change.
 1. A brief history
 1. **All about OAuth2**
 1. In practice: Spring AI integration
+1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
+1. Clients and Authorization Servers
 
 ---
 
@@ -274,9 +282,9 @@ class: background-contain
 
 &nbsp;
 
-There's a lot of relationships between actors.
+There are many relationships between actors, with varying levels of trust.
 
-The client <> server relation MUST be trusted.
+The client <> server relation **MUST** be trusted.
 
 ---
 layout: image
@@ -290,7 +298,68 @@ image: /sso-mcp-no-trust.png
 class: background-contain
 ---
 
+---
 
+# Client <> Auth Server trust
+
+&nbsp;
+
+Two options:
+
+- The MCP Client is pre-registered with the Auth Server
+    - Local app (Claude Desktop, Cursor, ...)
+    - Remote app (Spring AI, ...)
+- The MCP Client is _not_ pre-registered
+    - OAuth2 Dynamic Client Registration
+
+---
+
+# Securing MCP Servers
+
+1. A brief history
+1. All about OAuth2
+1. **In practice: Spring AI integration**
+1. Other implementations: Python's FastMCP
+1. Notable alternative: API keys
+1. Clients and Authorization Servers
+
+---
+
+## TODO
+
+---
+
+# Securing MCP Servers
+
+1. A brief history
+1. All about OAuth2
+1. In practice: Spring AI integration
+1. **Other implementations: Python's FastMCP**
+1. Notable alternative: API keys
+1. Clients and Authorization Servers
+
+---
+
+# Python's FastMCP
+
+### https://gofastmcp.com
+
+---
+
+# Securing MCP Servers
+
+1. A brief history
+1. All about OAuth2
+1. In practice: Spring AI integration
+1. Other implementations: Python's FastMCP
+1. **Notable alternative: API keys**
+1. Clients and Authorization Servers
+
+---
+
+# Notable alternatives: API key
+
+// TODO
 
 ---
 
