@@ -46,23 +46,7 @@ Software Engineer @ Broadcom
 
 # Securing MCP Servers
 
-1. A brief history
-    1. A timeline
-    1. The decision: oauth2
-    1. New stuff lol
-1. All about OAuth2
-    1. How oauth2 works
-    1. In MCP land
-    1. Spring AI integration
-    1. No token passthrough 😱
-1. Notable alternative: API keys
-    1. Demo
-    1. Drawbacks
-
----
-
-# Securing MCP Servers
-
+1. MCP: what and how?
 1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
@@ -72,14 +56,71 @@ Software Engineer @ Broadcom
 
 ---
 
+# MCP: what and how?
+
+&nbsp;
+
+> MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.
+>
+> &nbsp;
+>
+> <i>https://modelcontextprotocol.io/docs/getting-started/intro</i>
+
+
+---
+layout: image
+image: mcp-simple-diagram.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-architecture-clarification.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-stdio-vs-http-1.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-stdio-vs-http-2.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-stdio-vs-http-3.png
+class: background-contain
+---
+
+---
+
+# Some AI apps we'll use
+
+&nbsp;
+
+- Claude Code
+- MCP inspector
+    - Not an AI app, only does the MCP client part!
+
+But also Cursor, Windsurf, Claude Desktop, ...
+
+---
+
 # Securing MCP Servers
 
-1. **A brief history**
+1. MCP: what and how?
+1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
 1. Clients and Authorization Servers
+
 
 ---
 layout: image
@@ -185,8 +226,9 @@ It's early! It _will_ change.
 
 # Securing MCP Servers
 
+1. MCP: what and how?
 1. A brief history
-1. **All about OAuth2**
+1. All about OAuth2
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
@@ -316,25 +358,49 @@ Two options:
 
 # Securing MCP Servers
 
+1. MCP: what and how?
 1. A brief history
 1. All about OAuth2
-1. **In practice: Spring AI integration**
+1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
 1. Clients and Authorization Servers
 
 ---
 
-## TODO
+# Spring AI integration
+
+<br>
+
+<logos-github-icon /> https://github.com/spring-ai-community/mcp-security/
+
+Security for:
+- Spring AI MCP Servers
+- Spring AI MCP Clients
+- Spring Authorization Server
+
+
+---
+layout: image
+image: /mcp-oauth-simple.png
+class: background-contain
+---
+
+---
+layout: image
+image: /mcp-oauth-full.png
+class: background-contain
+---
 
 ---
 
 # Securing MCP Servers
 
+1. MCP: what and how?
 1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
-1. **Other implementations: Python's FastMCP**
+1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
 1. Clients and Authorization Servers
 
@@ -342,24 +408,43 @@ Two options:
 
 # Python's FastMCP
 
+<br>
+
 ### https://gofastmcp.com
+
+
+---
+layout: image
+image: /fastmcp-oauth-proxy.png
+class: background-contain
+---
+
+---
+layout: image
+image: /fastmcp-token-passthrough.png
+class: background-contain
+---
 
 ---
 
 # Securing MCP Servers
 
+1. MCP: what and how?
 1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
-1. **Notable alternative: API keys**
+1. Notable alternative: API keys
 1. Clients and Authorization Servers
 
 ---
 
 # Notable alternatives: API key
 
-// TODO
+<br>
+
+<logos-github-icon /> https://github.com/spring-ai-community/mcp-security/
+
 
 ---
 
@@ -367,7 +452,14 @@ Two options:
 
 &nbsp;
 
-#### <logos-github-icon /> https://github.com/Kehrlann/spring-security-authorization
+#### <logos-github-icon /> https://github.com/Kehrlann/securing-mcp-servers
+
+<!-- qrencode -s 9 -m 2 -o qr-code.png https://m.devoxx.com/events/dvbe25/talks/6226/securing-mcp-servers -->
+<div style="float:right; margin-right: 50px; text-align: center;">
+    <a href="https://m.devoxx.com/events/dvbe25/talks/6228/authorization-in-spring-security-permissions-roles-and-beyond" target="_blank">
+        <img src="/qr-code-devoxx-be.png" style="margin-bottom: -45px; height: 300px;" >
+    </a>
+</div>
 
 <br>
 
