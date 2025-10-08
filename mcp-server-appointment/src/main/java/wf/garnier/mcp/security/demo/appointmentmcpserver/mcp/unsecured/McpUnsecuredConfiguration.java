@@ -35,6 +35,15 @@ class McpUnsecuredConfiguration {
 			.build();
 	}
 
+	/**
+	 * An MCP server for weather info.
+	 * <p>
+	 * It is available at {@code /apikey/mcp}.
+	 * <p>
+	 * Note that it is configured manually in this bean, and not through Spring Boot
+	 * auto-configuration, so we can launch it independently from the main, OAuth2-secured
+	 * MCP server.
+	 */
 	@Bean
 	RouterFunction<?> unsecuredRouterFunction(ObjectMapper objectMapper, AppointmentService appointmentService) {
 		var service = new McpUnsecuredAppointmentService(appointmentService);

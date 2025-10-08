@@ -48,6 +48,15 @@ class McpApiKeyConfiguration {
 			.build()));
 	}
 
+	/**
+	 * An MCP server for weather info.
+	 * <p>
+	 * It is available at {@code /apikey/mcp}.
+	 * <p>
+	 * Note that it is configured manually in this bean, and not through Spring Boot
+	 * auto-configuration, so we can launch it independently from the main, OAuth2-secured
+	 * MCP server.
+	 */
 	@Bean
 	RouterFunction<?> apiKeyRouterFunction(ObjectMapper objectMapper, RestClient.Builder restClientBuilder) {
 		var service = new McpWeatherService(restClientBuilder);
