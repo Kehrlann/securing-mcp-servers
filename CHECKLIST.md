@@ -4,4 +4,6 @@
 - [ ] Remove connector claude code
 - [ ] Launch MCP inspector?
 - [ ] Remove connectors claude desktop
-- [ ] heroku apps:open -a dgarnier-mcp-appointment
+- [ ] heroku apps:open -a dgarnier-mcp-appointment, open
+- [ ] calendar.google.com
+- [ ] console.cloud.google.com
