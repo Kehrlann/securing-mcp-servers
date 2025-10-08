@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.springaicommunity</groupId>
             <artifactId>mcp-authorization-server</artifactId>
-            <version>0.0.2</version>
+            <version>${mcp-security.version}</version>
         </dependency>
 
 
