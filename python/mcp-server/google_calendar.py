@@ -40,7 +40,7 @@ class BusyResponse(BaseModel):
   busy_periods: list[BusyPeriod]
 
 
-@mcp.tool(name="is-busy", description="Find out whether the time blocks where the user is busy, between two dates")
+@mcp.tool(name="is-busy", description="Find out whether the time blocks where the user is busy, between to datetimes")
 def is_busy(start_date: datetime.date, end_date: datetime.date) -> BusyResponse:
   access_token_obj = get_access_token()
   print(access_token_obj)
