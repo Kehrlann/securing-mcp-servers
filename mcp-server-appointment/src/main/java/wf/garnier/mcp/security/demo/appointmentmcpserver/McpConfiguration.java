@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import static org.springaicommunity.mcp.security.server.config.McpServerOAuth2Configurer.mcpServerOAuth2;
 
 /**
  * See {@link SecurityConfiguration}.
@@ -22,13 +24,13 @@ class McpConfiguration {
 	@Bean
 	@Order(0)
 	SecurityFilterChain mcpFilterChain(HttpSecurity http) throws Exception {
-		return http.securityMatcher("/mcp", "/.well-known/**")
+		return http.securityMatcher("/mcp", "/.well-known/*", "/.well-known/**")
 			.authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
 			.with(McpServerOAuth2Configurer.mcpServerOAuth2(), config -> {
 				config.authorizationServer(issuerUrl);
 			})
 			.cors(cors -> cors.configurationSource(new AllowAllCorsConfigurationSource()))
-			.csrf(CsrfConfigurer::disable)
+            .csrf(CsrfConfigurer::disable)
 			.build();
 	}
 
