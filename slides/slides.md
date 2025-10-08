@@ -46,13 +46,12 @@ Software Engineer @ Broadcom
 
 # Securing MCP Servers
 
-1. MCP: what and how?
+1. **MCP: what and how?**
 1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
-1. Clients and Authorization Servers
 
 ---
 
@@ -111,15 +110,27 @@ But also Cursor, Windsurf, Claude Desktop, ...
 
 ---
 
+# Why authorization?
+
+&nbsp;
+
+Ensure that:
+- User is known to the system
+- User can see only their resources
+- User has permission to perform an action
+- System is auditable
+- ...
+
+---
+
 # Securing MCP Servers
 
 1. MCP: what and how?
-1. A brief history
+1. **A brief history**
 1. All about OAuth2
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
-1. Clients and Authorization Servers
 
 
 ---
@@ -201,26 +212,41 @@ image: mcp-history-13.png
     - Validates user identity, issues tokens
 
 ---
-layout: image
-image: rfc-pop-quizz-1.png
----
-
----
-layout: image
-image: rfc-pop-quizz-2.png
----
-
----
 
 # It's Complicated™
 
+- OAuth 2.1 IETF DRAFT (draft-ietf-oauth-v2-1-13)
+- OAuth 2.0 Authorization Server Metadata (RFC8414)
+- OAuth 2.0 Dynamic Client Registration Protocol (RFC7591)
+- OAuth 2.0 Protected Resource Metadata (RFC9728)
+- Resource Indicators for OAuth 2.0 (RFC8707)
+- JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens (RFC9068)
+
+
+---
+layout: image
+image: /mcp-oauth-simple.png
+class: background-contain
+---
+
+---
+layout: image
+image: /mcp-oauth-full.png
+class: background-contain
+---
+
+---
+
+# It's (very) Complicated™
+
 &nbsp;
 
-Noone fully implements the whole stack. The complexity is still very high.
+This is still very new:
 
-<br>
-
-It's early! It _will_ change.
+- Noone truly implements the whole stack
+- Interoperability needs improvement
+- Too complex for developers, too many failure modes
+- It _will_ change
 
 ---
 
@@ -228,11 +254,10 @@ It's early! It _will_ change.
 
 1. MCP: what and how?
 1. A brief history
-1. All about OAuth2
+1. **All about OAuth2**
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
-1. Clients and Authorization Servers
 
 ---
 
@@ -349,10 +374,10 @@ class: background-contain
 Two options:
 
 - The MCP Client is pre-registered with the Auth Server
-    - Local app (Claude Desktop, Cursor, ...)
-    - Remote app (Spring AI, ...)
+    - Great for remote app (Spring AI, ...), with known MCP servers
 - The MCP Client is _not_ pre-registered
-    - OAuth2 Dynamic Client Registration
+    - Needs OAuth2 Dynamic Client Registration
+    - Better UX for local apps
 
 ---
 
@@ -361,10 +386,9 @@ Two options:
 1. MCP: what and how?
 1. A brief history
 1. All about OAuth2
-1. In practice: Spring AI integration
+1. **In practice: Spring AI integration**
 1. Other implementations: Python's FastMCP
 1. Notable alternative: API keys
-1. Clients and Authorization Servers
 
 ---
 
@@ -381,18 +405,6 @@ Security for:
 
 
 ---
-layout: image
-image: /mcp-oauth-simple.png
-class: background-contain
----
-
----
-layout: image
-image: /mcp-oauth-full.png
-class: background-contain
----
-
----
 
 # Securing MCP Servers
 
@@ -400,9 +412,8 @@ class: background-contain
 1. A brief history
 1. All about OAuth2
 1. In practice: Spring AI integration
-1. Other implementations: Python's FastMCP
+1. **Other implementations: Python's FastMCP**
 1. Notable alternative: API keys
-1. Clients and Authorization Servers
 
 ---
 
@@ -434,8 +445,7 @@ class: background-contain
 1. All about OAuth2
 1. In practice: Spring AI integration
 1. Other implementations: Python's FastMCP
-1. Notable alternative: API keys
-1. Clients and Authorization Servers
+1. **Notable alternative: API keys**
 
 ---
 
