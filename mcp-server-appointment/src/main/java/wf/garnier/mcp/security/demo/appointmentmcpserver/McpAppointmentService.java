@@ -8,7 +8,6 @@ import io.modelcontextprotocol.spec.McpSchema;
 import org.springaicommunity.mcp.annotation.McpTool;
 import org.springaicommunity.mcp.annotation.McpToolParam;
 
-import org.springframework.ai.chat.messages.ToolResponseMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

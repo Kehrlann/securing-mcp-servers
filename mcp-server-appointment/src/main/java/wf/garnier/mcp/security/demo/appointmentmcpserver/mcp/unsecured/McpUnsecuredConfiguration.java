@@ -45,10 +45,17 @@ class McpUnsecuredConfiguration {
 			.messageEndpoint("/unsecured/mcp")
 			.build();
 		McpSchema.Implementation serverInfo = new McpSchema.Implementation("Unsecured MCP server", "1.0.0");
+		// Claude code calls prompts and resources, event if you don't advertise the
+		// capabilities...
+		var serverCapabilities = McpSchema.ServerCapabilities.builder()
+			.tools(false)
+			.prompts(false)
+			.resources(false, false)
+			.build();
 		McpServer.sync(transport)
 			.serverInfo(serverInfo)
 			.immediateExecution(true)
-			.capabilities(McpSchema.ServerCapabilities.builder().tools(false).build())
+			.capabilities(serverCapabilities)
 			.requestTimeout(Duration.ofSeconds(10))
 			.tools(toolsSpecs)
 			.build();
