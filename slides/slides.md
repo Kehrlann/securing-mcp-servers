@@ -164,41 +164,6 @@ image: mcp-history-6.png
 ---
 
 ---
-layout: image
-image: mcp-history-7.png
----
-
----
-layout: image
-image: mcp-history-8.png
----
-
----
-layout: image
-image: mcp-history-9.png
----
-
----
-layout: image
-image: mcp-history-10.png
----
-
----
-layout: image
-image: mcp-history-11.png
----
-
----
-layout: image
-image: mcp-history-12.png
----
-
----
-layout: image
-image: mcp-history-13.png
----
-
----
 
 # The spec: use OAuth2
 
@@ -403,6 +368,11 @@ Security for:
 - Spring AI MCP Clients
 - Spring Authorization Server
 
+---
+layout: image
+image: /mcp-oauth-simple.png
+class: background-contain
+---
 
 ---
 
