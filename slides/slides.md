@@ -98,18 +98,6 @@ class: background-contain
 
 ---
 
-# Some AI apps we'll use
-
-&nbsp;
-
-- Claude Code
-- MCP inspector
-    - Not an AI app, only does the MCP client part!
-
-But also Cursor, Windsurf, Claude Desktop, ...
-
----
-
 # Why authorization?
 
 &nbsp;
@@ -120,6 +108,18 @@ Ensure that:
 - User has permission to perform an action
 - System is auditable
 - ...
+
+---
+
+# Some AI apps we'll use
+
+&nbsp;
+
+- Claude Code
+- MCP inspector
+    - Not an AI app, only does the MCP client part!
+
+But also Cursor, Windsurf, Claude Desktop, ...
 
 ---
 
