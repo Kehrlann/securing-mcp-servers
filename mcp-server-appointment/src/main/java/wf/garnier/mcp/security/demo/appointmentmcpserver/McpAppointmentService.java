@@ -31,21 +31,27 @@ class McpAppointmentService {
 	}
 
 	@McpTool(name = "all-appointment-slots",
-			description = "List all available appointment slots between to datetimes, with a status indicating whether it's booked")
+			description = "List all available appointment slots between two datetimes, with a status indicating whether it's booked")
 	public List<AppointmentWithBooking> allAppointmentSlots(
 			@McpToolParam(description = "the start date and time, inclusive", required = false) LocalDate startDate,
 			@McpToolParam(description = "the end date and time, inclusive", required = false) LocalDate endDate) {
-		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		var email = jwt.getSubject();
 
 		return appointmentService.findSlotsByDateRange(startDate, endDate)
 			.stream()
-			.map(slot -> new AppointmentWithBooking(slot.id(), slot.name(), slot.dateTime(),
-					appointmentService.isBooked(slot.id(), email)))
+			.map(slot -> new AppointmentWithBooking(slot.id(), slot.name(), slot.dateTime(), isBooked(slot)))
 			.toList();
 	}
 
-	record AppointmentWithBooking(Integer id, String name, LocalDateTime localDateTime, boolean booked) {
+	private BookingStatus isBooked(AppointmentSlot slot) {
+		if (SecurityContextHolder.getContext().getAuthentication() == null) {
+			return BookingStatus.UNKNOWN;
+		}
+		if (!(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Jwt jwt)) {
+			return BookingStatus.UNKNOWN;
+		}
+
+		return appointmentService.isBooked(slot.id(), jwt.getSubject()) ? BookingStatus.BOOKED
+				: BookingStatus.NOT_BOOKED;
 	}
 
 	@McpTool(name = "book-appointment", description = "Book an appointment by name and datetime")
@@ -63,15 +69,25 @@ class McpAppointmentService {
 		var slot = slotOpt.get();
 
 		if (appointmentService.isBooked(slot.id(), email)) {
-            return McpSchema.CallToolResult.builder().isError(true).addTextContent("appointment is already booked").build();
+			return McpSchema.CallToolResult.builder()
+				.isError(true)
+				.addTextContent("appointment is already booked")
+				.build();
 		}
 
 		appointmentService.bookAppointment(slot.id(), email);
 
-		var booking = new AppointmentWithBooking(slot.id(), slot.name(), slot.dateTime(), true);
-		return McpSchema.CallToolResult.builder()
-                .structuredContent(booking)
-                .build();
+		var booking = new AppointmentWithBooking(slot.id(), slot.name(), slot.dateTime(), BookingStatus.BOOKED);
+		return McpSchema.CallToolResult.builder().structuredContent(booking).build();
+	}
+
+	record AppointmentWithBooking(Integer id, String name, LocalDateTime localDateTime, BookingStatus status) {
+	}
+
+	enum BookingStatus {
+
+		BOOKED, NOT_BOOKED, UNKNOWN
+
 	}
 
 }
