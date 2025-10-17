@@ -38,7 +38,7 @@ class McpUnsecuredConfiguration {
 	/**
 	 * An MCP server for weather info.
 	 * <p>
-	 * It is available at {@code /apikey/mcp}.
+	 * It is available at {@code /unsecured/mcp}.
 	 * <p>
 	 * Note that it is configured manually in this bean, and not through Spring Boot
 	 * auto-configuration, so we can launch it independently from the main, OAuth2-secured
